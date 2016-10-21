@@ -1,0 +1,23 @@
+<%= link_to 'Add New Holidays', new_holiday_path, class: "btn btn-success" %>
+<hr>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <% @holidays.each do |holiday| %>
+        <div class="col-md-3">
+          <div class="well">
+            <h4 class="text-danger"><span class="label text-success pull-right label-color"><%= holiday.name %></span> name </h4>
+            <p class="text-danger"><span class="label text-success pull-right label-color"><%= holiday.description %></span> Description </p>
+            <p class="text-danger"><span class="label text-success pull-right label-color"><%= holiday.day %></span> ON Day </p>
+            <div class="links">
+              <%= link_to 'Show', holiday, class: "text-danger" %>
+              <%= link_to 'Edit', edit_holiday_path(holiday), class: "text-danger" %>
+              <%= link_to 'Destroy', holiday_path(holiday), class: "text-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= paginate @holidays, :theme => 'twitter-bootstrap-3',:pagination_class => "pagination-sm" %>

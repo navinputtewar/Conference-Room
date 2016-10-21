@@ -1,0 +1,25 @@
+<nav class="navbar navbar-default">
+  <div id="navbar" class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="/">Home</a>
+      </li>
+    </ul>
+    <p class="navbar-text">
+      <% if user_signed_in? %>
+        Logged in as
+        <strong><font color="white"><%= link_to current_user.name, root_path %></font></strong>
+    </p>
+    <p class="navbar-text pull-right">
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Sign_out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    </p>
+      <% else %>
+      <p class="navbar-text text-right">
+        <%= link_to "Register", new_user_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Sign_in", new_user_session_path, :class => 'navbar-link'  %>
+      </p>
+      <% end %>
+    </p>
+  </div>
+</nav>

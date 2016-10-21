@@ -1,0 +1,30 @@
+<%= form_for @book_room, url: booked_room_conference_room_path(@conference_room), method: :post do |f| %>
+
+  <% if @book_room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book_room.errors.count, "error") %> prohibited this book_room from being saved:</h2>
+
+      <ul>
+      <% @book_room.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.datetime_select :start_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_time %><br>
+    <%= f.datetime_select :end_time %>
+  </div>
+  <div class="field">
+    <%= f.label :purpose %><br>
+    <%= f.text_field :purpose %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

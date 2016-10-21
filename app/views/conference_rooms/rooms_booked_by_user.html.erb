@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <% @user_booked_rooms.each do |room| %>
+      <% conference_room_data(room) %>
+        <div class="col-md-3">
+          <div class="well">
+            <h4 class="text-success"><span class="label text-success pull-right label-color"><%= @conference_room.try(:title) %></span> Title </h4>
+            <p class="text-success"><span class="label text-success pull-right label-color"><%= @conference_room.try(:description) %></span> Description </p>
+            <p class="text-success"><span class="label text-success pull-right label-color"><%= format_date(room.start_time) %></span> Start Time </p>
+            <p class="text-success"><span class="label text-success pull-right label-color"><%= format_date(room.end_time) %></span> End Time </p>
+            <p class="text-success"><span class="label text-success pull-right label-color"><%= room.purpose %></span> Purpose </p>
+            <p class="text-success"><span class="label text-success pull-right label-color"><%= room.status %></span> Status </p>
+            <p class="text-success"><span class="label text-success pull-right label-color"><%= @user.name %></span> Booked By </p>
+            <% if @user == current_user && @conference_room.present?%>
+              <div class="links">
+                <%= link_to 'Cancle booking', cancle_booking_conference_room_path(id: @conference_room.id, booked_room_id: room.id) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= paginate @user_booked_rooms, :theme => 'twitter-bootstrap-3',:pagination_class => "pagination-sm" %>

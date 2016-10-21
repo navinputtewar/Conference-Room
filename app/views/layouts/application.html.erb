@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ConferenceRoomApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="header-wrapper">
+      <%= render 'layouts/shared/header' %>
+    </div>
+    <div class="header-main">
+      <div class="container">
+        <div class="error-flash-msg">
+         <%= render 'layouts/shared/messages' %>
+        </div>
+        <div class="heading">
+          <%= yield %> 
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

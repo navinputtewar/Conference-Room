@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+
+development:
+  <<: *default
+  username: postgres
+  password: postgres
+  host: localhost  
+  database: conference_room_app_development
+
+test:
+  <<: *default
+  username: postgres
+  password: postgres
+  host: localhost  
+  database: conference_room_app_test
+
+production:
+  <<: *default
+  username: postgres
+  password: postgres
+  host: localhost  
+  database: conference_room_app_production

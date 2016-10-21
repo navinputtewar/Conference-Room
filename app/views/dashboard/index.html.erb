@@ -1,0 +1,44 @@
+<%= link_to 'Check Booked Rooms', rooms_booked_by_user_conference_rooms_path, :class => "btn btn-primary" %>
+<h1>Listing Conference Rooms</h1>
+  <div class="col-md-6">
+    <% if can? :manage, @conference_room || ConferenceRoom %>
+      <%= link_to 'New Conference Room', new_conference_room_path %>
+      <%= link_to 'Add New Holidays', new_holiday_path %>
+    <% end %>
+    <%= link_to 'List Of Holidays', holidays_path %>
+  </div>
+  <div class="col-md-6">
+    <%= form_tag dashboard_index_path, :method => 'get' do %>
+      <p>
+        <%= text_field_tag :search, params[:search], class: "search-field" %>
+        <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+      </p>
+    <% end %>
+  </div>
+<hr>     
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <% @conference_rooms.each do |conference_room| %>
+        <div class="col-md-3">
+          <div class="well">
+            <h4 class="text-primary"><span class="label text-success pull-right label-color"><%= conference_room.title %></span> Title </h4>
+            <p class="text-primary"><span class="label text-success pull-right label-color"><%= conference_room.description %></span> Description </p>
+            <p class="text-primary"><span class="label text-success pull-right label-color"><%= remaining_availability(conference_room) %></span> Available Booking </p>
+            <p class="text-primary"><span class="label text-success pull-right label-color"><%= conference_room.tag_list %></span> Facility </p>
+            <div class="links">
+              <%= link_to 'Book room', book_room_conference_room_path(conference_room) %>
+              <%= link_to 'Show', conference_room %>
+              <% if can? :manage, @conference_room || ConferenceRoom %>
+                <%= link_to 'Edit', edit_conference_room_path(conference_room) %>
+                <%= link_to 'Destroy', conference_room_path(conference_room), method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<%= paginate @conference_rooms, :theme => 'twitter-bootstrap-3',:pagination_class => "pagination-sm" %>
+<div id="calendar" class="cal-wid"></div>
