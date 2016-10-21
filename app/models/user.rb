@@ -12,9 +12,9 @@ class User < ApplicationRecord
   after_create :set_role
 
 
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
-  end
+  # def send_devise_notification(notification, *args)
+  #   devise_mailer.send(notification, self, *args).deliver_later
+  # end
 
   def set_role
     self.role ? self.add_role(self.role) : self.add_role("Guest")
