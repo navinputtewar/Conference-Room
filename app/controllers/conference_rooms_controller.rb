@@ -50,7 +50,7 @@ class ConferenceRoomsController < ApplicationController
         book_room.status = 0
         book_room.conference_room_id = params[:id]
         book_room.save
-        RoomBookingJob.perform_later(@conference_room.id, current_user.id)
+        #RoomBookingJob.perform_later(@conference_room.id, current_user.id)
         redirect_to root_path, notice: 'Conference_room booked successfully' and return
       else
         render :book_room
@@ -66,7 +66,7 @@ class ConferenceRoomsController < ApplicationController
     booked_room = current_user.booked_rooms.find_by(id: params[:booked_room_id])
     records = @conference_room.booked_rooms_records.where('(start_time, end_time) overlaps (timestamp :start_time, timestamp :end_time)',:start_time => booked_room.start_time, :end_time => booked_room.end_time)
       booked_room.destroy
-      RoomCancelingJob.perform_later(@conference_room.id, current_user.id)
+      #RoomCancelingJob.perform_later(@conference_room.id, current_user.id)
     if records.present?
       records.first.update_attributes(status: 0)
       redirect_to root_path, notice: "Booking cancle successfully"
